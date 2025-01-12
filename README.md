@@ -3,15 +3,15 @@ MSc host environment configuration
 
 ## Content
 
-1. Repositories list
-2. Used repositories branch
-3. How to build
-4. How to run
-5. Database seeding/initialization
-6. Postman collections
-7. Profiling
-8. Gatling simulations
-9. Aegeus
+1. [Repositories list](https://github.com/gustavotemple/MSc-host-env-config#repositories-list)
+2. [Used repositories branch](https://github.com/gustavotemple/MSc-host-env-config#used-repositories-branch)
+3. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
+4. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
+5. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
+6. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
+7. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
+8. [Gatling simulations](https://github.com/gustavotemple/MSc-host-env-config#gatling-simulations)
+9. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
 
 ## Repositories list
 
@@ -82,7 +82,7 @@ docker build -t choerodon-<REPO> -f Dockerfile .
 
 https://github.com/gustavotemple/MSc-host-env-config/tree/main/docker-composes
 
-Run:
+**Run:**
 
 ```bash
 docker stack deploy --compose-file docker-compose.yml <NAME>
@@ -200,7 +200,7 @@ sbt "gatling:testOnly gatling.<SIMULATION>Test"
 bash get_implementations_and_run_aegeus.sh /home/user/choerodon-repos
 ```
 
-_Result:_ SERVICES.out file containing the paths of the controllers
+_Result:_ `SERVICES.out` file containing the paths of the controllers
 
 **Step 2:** Aggregate the individual analyses of the controllers using the `writemsdescriptor` flag
 

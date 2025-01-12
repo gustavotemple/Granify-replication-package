@@ -1,0 +1,97 @@
+# docker swarm init --advertise-addr 127.0.0.1
+# docker stack rm test
+# docker stack deploy --compose-file docker-compose.yml test
+# docker stats
+
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6380:6379"
+    networks:
+      redis-net:
+    volumes:
+      - redis-data:/data
+  mysql1:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_USER=front50
+      - MYSQL_DATABASE=front50
+      - MYSQL_PASSWORD=front50
+      - MYSQL_ROOT_PASSWORD=front50
+    volumes:
+      - mysql1-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      mysql1-net:
+  mysql2:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_USER=orca
+      - MYSQL_DATABASE=orca
+      - MYSQL_PASSWORD=orca
+      - MYSQL_ROOT_PASSWORD=orca
+    volumes:
+      - mysql2-data:/var/lib/mysql
+    ports:
+      - "3308:3306"
+    networks:
+      mysql2-net:
+  front50:
+    image: front50
+    restart: on-failure
+    network_mode: host
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
+    depends_on:
+      - mysql1
+    networks:
+      mysql1-net:
+      front50-net:
+  orca:
+    image: orca
+    restart: on-failure
+    network_mode: host
+    user: root
+    working_dir: /root
+    ports:
+      - "8083:8083"
+    volumes:
+      - /tmp:/tmp
+      - /root/async-profiler:/root/async-profiler
+    security_opt:
+      - seccomp:unconfined
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
+    depends_on:
+      - redis
+      - mysql2
+      - front50
+    networks:
+      redis-net:
+      mysql2-net:
+      front50-net:
+
+volumes:
+  mysql1-data:
+  mysql2-data:
+  redis-data:
+
+networks:
+  redis-net:
+  mysql1-net:
+  mysql2-net:
+  front50-net:

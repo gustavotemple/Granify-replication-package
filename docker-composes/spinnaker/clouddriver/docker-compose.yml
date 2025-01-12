@@ -1,0 +1,50 @@
+# docker swarm init --advertise-addr 127.0.0.1
+# docker stack rm clouddriver
+# docker stack deploy --compose-file docker-compose.yml clouddriver
+# docker stats
+
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_USER=clouddriver
+      - MYSQL_DATABASE=clouddriver
+      - MYSQL_PASSWORD=clouddriver
+      - MYSQL_ROOT_PASSWORD=clouddriver
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      mysql-net:
+  clouddriver:
+    image: clouddriver
+    restart: on-failure
+    network_mode: host
+    user: root
+    working_dir: /root
+    ports:
+      - "7002:7002"
+    volumes:
+      - /tmp:/tmp
+      - /root/async-profiler:/root/async-profiler
+    security_opt:
+      - seccomp:unconfined
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
+    depends_on:
+      - mysql
+    networks:
+      mysql-net:
+
+volumes:
+  mysql-data:
+
+networks:
+  mysql-net:

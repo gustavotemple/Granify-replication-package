@@ -1,0 +1,95 @@
+# docker swarm init --advertise-addr 127.0.0.1
+# docker stack rm workflow
+# docker stack deploy --compose-file docker-compose.yml workflow
+# docker stats
+
+version: '3'
+
+services:
+  choerodon-redis:
+    image: redis:latest
+    ports:
+      - "6380:6379"
+    networks:
+      choerodon-redis-net:
+    volumes:
+      - choerodon-redis-data:/data
+
+#  choerodon-mysql1:
+#    image: mysql:5.7
+#    restart: unless-stopped
+#    command: ['--lower_case_table_names=1', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+#    environment:
+#      - MYSQL_USER=choerodon
+#      - MYSQL_DATABASE=hzero_platform
+#      - MYSQL_PASSWORD=choerodon
+#      - MYSQL_ROOT_PASSWORD=choerodon
+#    volumes:
+#      - choerodon-mysql1-data:/var/lib/mysql
+#    ports:
+#      - "3307:3306"
+#    networks:
+#      choerodon-mysql1-net:
+
+  choerodon-mysql2:
+    image: mysql:5.7
+    restart: unless-stopped
+    command: ['--lower_case_table_names=1', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    environment:
+      - MYSQL_USER=choerodon
+      - MYSQL_DATABASE=workflow_service
+      - MYSQL_PASSWORD=choerodon
+      - MYSQL_ROOT_PASSWORD=choerodon
+    volumes:
+      - choerodon-mysql2-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      choerodon-mysql2-net:
+
+#  choerodon-register:
+#    image: choerodon-register
+#    restart: on-failure
+#    network_mode: host
+#    ports:
+#      - "8000:8000"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '1'
+#          memory: 500M
+#    networks:
+#      choerodon-register-net:
+
+#  choerodon-workflow:
+#    image: choerodon-workflow
+#    restart: on-failure
+#    network_mode: host
+#    ports:
+#      - "8065:8065"
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '1'
+#          memory: 1G
+#    depends_on:
+#      - choerodon-redis
+##      - choerodon-mysql1
+#      - choerodon-mysql2
+#      - choerodon-register
+#    networks:
+#      choerodon-redis-net:
+##      choerodon-mysql1-net:
+#      choerodon-mysql2-net:
+#      choerodon-register-net:
+
+volumes:
+  choerodon-redis-data:
+#  choerodon-mysql1-data:
+  choerodon-mysql2-data:
+
+networks:
+  choerodon-redis-net:
+#  choerodon-mysql1-net:
+  choerodon-mysql2-net:
+#  choerodon-register-net:

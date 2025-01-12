@@ -8,9 +8,9 @@ MSc host environment configuration
 3. How to build
 4. How to run
 5. Database seeding/initialization
-6. Repositories with Postman collection
+6. Postman collections
 7. Profiling
-8. Repositories with Gatling simulations
+8. Gatling simulations
 9. Aegeus
 
 ## Repositories list
@@ -59,11 +59,15 @@ Examples below:
 ### Spinnaker
 
 ```bash
+./gradlew clean build -x test
 ./gradlew --no-daemon <REPO>-web:installDist -x test
 docker build -t <REPO> -f Dockerfile.ubuntu .
 ```
 
 ### Choerodon
+
+First of all, you need to build the `hzero-starter`, which is a dependency library.
+After that:
 
 ```bash
 mvn clean package spring-boot:repackage -Dmaven.test.skip=true
@@ -72,7 +76,29 @@ docker build -t choerodon-<REPO> -f Dockerfile .
 
 ## How to run
 
-...
+### Containerized
+
+`docker-compose.yml` folder:
+https://github.com/gustavotemple/MSc-host-env-config/tree/main/docker-composes
+
+Run:
+```bash
+docker stack deploy --compose-file docker-compose.yml <NAME>
+```
+
+### Locally
+
+#### Spinnaker
+
+`./gradlew run`
+
+#### Choerodon
+
+```bash
+mvn spring-boot:run
+# or:
+java -jar target/app.jar
+```
 
 ## Database seeding/initialization
 
@@ -90,7 +116,7 @@ Just follow the instructions in the Choerodon service READMEs. Example:
 
 In case of case-sensitive errors, use: `lower_case_table_names=1`
 
-## Repositories with Postman collection
+## Postman collections
 
 ### Spinnaker
 
@@ -104,7 +130,35 @@ In case of case-sensitive errors, use: `lower_case_table_names=1`
 - [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard/tree/v2.0.3-branch/postman)
 - [workflow-service](https://github.com/gustavotemple/workflow-service/tree/v2.0.3-branch/postman)
 
-## Repositories with Gatling simulations
+
+## Profiling
+
+### How to build
+
+Setup:
+https://github.com/async-profiler/async-profiler
+
+### How to run
+
+CPU:
+
+```bash
+# spinnaker:
+async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title orca-cpu -e itimer <PID>             
+# choerodon
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>                 
+```
+
+Memory:
+
+```bash
+# spinnaker:
+async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d <SECONDS> -f <FILE-NAME>-mem.html --title <TITLE>-mem -e alloc <PID>
+# choerodon
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d <SECONDS> -f <FILE-NAME>-mem.html --title <TITLE>-mem -e alloc <PID>
+```
+
+## Gatling simulations
 
 ### Spinnaker
 
@@ -125,6 +179,36 @@ https://github.com/gatling/gatling-sbt-plugin-demo
 
 ```bash
 sbt clean compile
-sbt "gatling:testOnly gatling.<Simulation>Test"
+sbt "gatling:testOnly gatling.<SIMULATION>Test"
 ```
+
+## Aegeus
+ 
+Repositories:
+- https://github.com/MateusGabi/Aegeus
+- https://github.com/MateusGabi/Aegeus-scripts
+
+**Step 1:** Get the path of each controller in the microservice
+
+```bash
+bash get_implementations_and_run_aegeus.sh /home/user/choerodon-repos
+```
+
+_Result:_ SERVICES.out file containing the paths of the controllers
+
+**Step 2:** Aggregate the individual analyses of the controllers using the `writemsdescriptor` flag
+
+```bash
+java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aegeus/repos/home/user/choerodon-repos -p java -writemsdescriptor
+```
+
+_Result:_ `.msd` file with the analysis of each controller, containing `params`, `output` and `types`
+
+**Step 3:** Analyze the metrics of the entire microservice using the `assessmetricsinmsa` flag
+
+```bash
+java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aegeus/repos/home/user/choerodon-repos -p java -assessmetricsinmsa
+```
+
+_Result:_ `.mr` file with the microservice analysis, containing `ServiceInterfaceDataCohesion`, `StrictServiceImplementationCohesion`, `LackOfMessageLevelCohesion` and `NumberOfOperations`
 

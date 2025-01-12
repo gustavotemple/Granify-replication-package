@@ -1,6 +1,6 @@
 # docker swarm init --advertise-addr 127.0.0.1
-# docker stack rm test
-# docker stack deploy --compose-file docker-compose.yml test
+# docker stack rm orca
+# docker stack deploy --compose-file docker-compose.yml orca
 # docker stats
 
 version: '3'

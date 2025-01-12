@@ -18,7 +18,7 @@ MSc host environment configuration
 - [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard)
 - [workflow-service](https://github.com/gustavotemple/workflow-service)
 
-## Repositories branches
+## Used repositories branch
 
 ### Spinnaker
 
@@ -34,3 +34,29 @@ MSc host environment configuration
 - choerodon-iam: `v2.0.8`
 - choerodon-asgard: `v2.0.3`
 - workflow-service: `v2.0.3`
+
+## Repositories with Postman collection
+
+### Spinnaker
+
+- [front50](https://github.com/gustavotemple/front50/tree/v2.28.4-branch/postman)
+- [orca](https://github.com/gustavotemple/orca/tree/v8.31.5-branch/postman)
+- [clouddriver](https://github.com/gustavotemple/clouddriver/tree/v5.80.7-branch/postman)
+
+### Choerodon
+
+- [choerodon-iam](https://github.com/gustavotemple/choerodon-iam/tree/v2.0.8-branch/postman)
+- [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard/tree/v2.0.3-branch/postman)
+- [workflow-service](https://github.com/gustavotemple/workflow-service/tree/v2.0.3-branch/postman)
+
+## Repositories with Gatling simulations
+
+### Spinnaker
+
+- [orca](https://github.com/gustavotemple/orca/tree/v8.31.5-branch/gatling)
+- [clouddriver](https://github.com/gustavotemple/clouddriver/tree/v5.80.7-branch/gatling)
+
+### Choerodon
+
+- [choerodon-iam](https://github.com/gustavotemple/choerodon-iam/tree/v2.0.8-branch/gatling)
+- [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard/tree/v2.0.3-branch/gatling)

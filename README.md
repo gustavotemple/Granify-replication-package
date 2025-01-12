@@ -43,17 +43,15 @@ Examples below:
 ### Spinnaker
 
 ```bash
-./gradlew --no-daemon orca-web:installDist -x test
-# docker rmi <repo>
-docker build -t <repo> -f Dockerfile.ubuntu .
+./gradlew --no-daemon <REPO>-web:installDist -x test
+docker build -t <REPO> -f Dockerfile.ubuntu .
 ```
 
 ### Choerodon
 
 ```bash
 mvn clean package spring-boot:repackage -Dmaven.test.skip=true
-# docker rmi choerodon-<repo>
-docker build -t choerodon-<repo> -f Dockerfile .
+docker build -t choerodon-<REPO> -f Dockerfile .
 ```
 
 ## Repositories with Postman collection

@@ -60,3 +60,22 @@ MSc host environment configuration
 
 - [choerodon-iam](https://github.com/gustavotemple/choerodon-iam/tree/v2.0.8-branch/gatling)
 - [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard/tree/v2.0.3-branch/gatling)
+
+### How to build
+
+Using the SBT project:
+https://github.com/gatling/gatling-sbt-plugin-demo
+
+Example:
+https://github.com/gustavotemple/gatling-sbt-plugin-demo
+
+### How to run
+
+```bash
+sbt clean compile
+sbt "gatling:testOnly gatling.<Simulation>Test"
+```
+
+
+
+

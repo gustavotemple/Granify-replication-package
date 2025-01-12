@@ -15,21 +15,21 @@ services:
     volumes:
       - choerodon-redis-data:/data
 
-  choerodon-mysql1:
-    image: mysql:5.7
-    restart: unless-stopped
-    command: ['--lower_case_table_names=1', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
-    environment:
-      - MYSQL_USER=choerodon
-      - MYSQL_DATABASE=hzero_platform
-      - MYSQL_PASSWORD=choerodon
-      - MYSQL_ROOT_PASSWORD=choerodon
-    volumes:
-      - choerodon-mysql1-data:/var/lib/mysql
-    ports:
-      - "3307:3306"
-    networks:
-      choerodon-mysql1-net:
+#  choerodon-mysql1:
+#    image: mysql:5.7
+#    restart: unless-stopped
+#    command: ['--lower_case_table_names=1', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+#    environment:
+#      - MYSQL_USER=choerodon
+#      - MYSQL_DATABASE=hzero_platform
+#      - MYSQL_PASSWORD=choerodon
+#      - MYSQL_ROOT_PASSWORD=choerodon
+#    volumes:
+#      - choerodon-mysql1-data:/var/lib/mysql
+#    ports:
+#      - "3307:3306"
+#    networks:
+#      choerodon-mysql1-net:
 
   choerodon-mysql2:
     image: mysql:5.7
@@ -74,22 +74,22 @@ services:
           memory: 1G
     depends_on:
       - choerodon-redis
-      - choerodon-mysql1
+#      - choerodon-mysql1
       - choerodon-mysql2
       - choerodon-register
     networks:
       choerodon-redis-net:
-      choerodon-mysql1-net:
+#      choerodon-mysql1-net:
       choerodon-mysql2-net:
       choerodon-register-net:
 
 volumes:
   choerodon-redis-data:
-  choerodon-mysql1-data:
+#  choerodon-mysql1-data:
   choerodon-mysql2-data:
 
 networks:
   choerodon-redis-net:
-  choerodon-mysql1-net:
+#  choerodon-mysql1-net:
   choerodon-mysql2-net:
   choerodon-register-net:

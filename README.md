@@ -1,7 +1,7 @@
 # MSc-host-env-config
 MSc host environment configuration
 
-## Repos list
+## Repositories list
 
 ### Spinnaker
 
@@ -17,3 +17,20 @@ MSc host environment configuration
 - [choerodon-iam](https://github.com/gustavotemple/choerodon-iam)
 - [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard)
 - [workflow-service](https://github.com/gustavotemple/workflow-service)
+
+## Repositories branches
+
+### Spinnaker
+
+- front50: `v2.28.4`
+- orca: `v8.31.5`
+- clouddriver: `v5.80.7`
+
+### Choerodon
+
+- hzero-starter-parent: `1.4`
+- choerodon-register: `v2.0.0`
+- choerodon-platform: `v2.0.3`
+- choerodon-iam: `v2.0.8`
+- choerodon-asgard: `v2.0.3`
+- workflow-service: `v2.0.3`

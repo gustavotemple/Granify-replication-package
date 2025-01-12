@@ -8,10 +8,11 @@ MSc host environment configuration
 3. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
 4. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
 5. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
-6. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
-7. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
-8. [Gatling simulations](https://github.com/gustavotemple/MSc-host-env-config#gatling-simulations)
-9. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
+6. [Swagger](https://github.com/gustavotemple/MSc-host-env-config#swagger)
+7. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
+9. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
+9. [Gatling simulations](https://github.com/gustavotemple/MSc-host-env-config#gatling-simulations)
+10. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
 
 ## Repositories list
 
@@ -118,6 +119,20 @@ Example:
 ```
 
 In case of case-sensitive errors, use: `lower_case_table_names=1`
+
+## Swagger
+
+### Spinnaker
+
+- Front50: http://127.0.0.1:8080/swagger-ui.html
+- Clouddriver: http://127.0.0.1:7002/swagger-ui.html
+- Orca: http://127.0.0.1:8083/swagger-ui.html
+
+### Choerodon
+
+- IAM: http://localhost:8030/v2/api-docs
+- Asgard: http://localhost:8040/v2/api-docs
+- Workflow: http://localhost:8065/v2/api-docs
 
 ## Postman collections
 

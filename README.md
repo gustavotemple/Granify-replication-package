@@ -1,7 +1,21 @@
 # MSc-host-env-config
 MSc host environment configuration
 
+## Content
+
+1. Repositories list
+2. Used repositories branch
+3. How to build
+4. How to run
+5. Database seeding/initialization
+6. Repositories with Postman collection
+7. Profiling
+8. Repositories with Gatling simulations
+9. Aegeus
+
 ## Repositories list
+
+`git clone` the repositories below:
 
 ### Spinnaker
 
@@ -19,6 +33,8 @@ MSc host environment configuration
 - [workflow-service](https://github.com/gustavotemple/workflow-service)
 
 ## Used repositories branch
+
+`git checkout` the branches below:
 
 ### Spinnaker
 
@@ -53,6 +69,26 @@ docker build -t <REPO> -f Dockerfile.ubuntu .
 mvn clean package spring-boot:repackage -Dmaven.test.skip=true
 docker build -t choerodon-<REPO> -f Dockerfile .
 ```
+
+## How to run
+
+...
+
+## Database seeding/initialization
+
+### Spinnaker
+
+Just run the front50 Postman collection.
+
+### Choerodon
+
+Just follow the instructions in the Choerodon service READMEs. Example:
+
+```bash
+./init-database.sh
+```
+
+In case of case-sensitive errors, use: `lower_case_table_names=1`
 
 ## Repositories with Postman collection
 
@@ -91,3 +127,4 @@ https://github.com/gatling/gatling-sbt-plugin-demo
 sbt clean compile
 sbt "gatling:testOnly gatling.<Simulation>Test"
 ```
+

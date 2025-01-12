@@ -79,9 +79,11 @@ docker build -t choerodon-<REPO> -f Dockerfile .
 ### Containerized
 
 `docker-compose.yml` folder:
+
 https://github.com/gustavotemple/MSc-host-env-config/tree/main/docker-composes
 
 Run:
+
 ```bash
 docker stack deploy --compose-file docker-compose.yml <NAME>
 ```
@@ -108,7 +110,8 @@ Just run the front50 Postman collection.
 
 ### Choerodon
 
-Just follow the instructions in the Choerodon service READMEs. Example:
+Just follow the instructions in the Choerodon service READMEs.
+Example:
 
 ```bash
 ./init-database.sh
@@ -144,9 +147,9 @@ CPU:
 
 ```bash
 # spinnaker:
-async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title orca-cpu -e itimer <PID>             
+async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>
 # choerodon
-async-profiler/build/bin/asprof -I 'io/choerodon/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>                 
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>
 ```
 
 Memory:
@@ -184,9 +187,12 @@ sbt "gatling:testOnly gatling.<SIMULATION>Test"
 
 ## Aegeus
  
-Repositories:
+### Repositories
+
 - https://github.com/MateusGabi/Aegeus
 - https://github.com/MateusGabi/Aegeus-scripts
+
+### Steps
 
 **Step 1:** Get the path of each controller in the microservice
 

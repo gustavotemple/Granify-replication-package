@@ -35,6 +35,27 @@ MSc host environment configuration
 - choerodon-asgard: `v2.0.3`
 - workflow-service: `v2.0.3`
 
+## How to build
+
+All repositories have a `Dockerfile` with instructions on how to build inside.
+Examples below:
+
+### Spinnaker
+
+```bash
+./gradlew --no-daemon orca-web:installDist -x test
+# docker rmi <repo>
+docker build -t <repo> -f Dockerfile.ubuntu .
+```
+
+### Choerodon
+
+```bash
+mvn clean package spring-boot:repackage -Dmaven.test.skip=true
+# docker rmi choerodon-<repo>
+docker build -t choerodon-<repo> -f Dockerfile .
+```
+
 ## Repositories with Postman collection
 
 ### Spinnaker
@@ -66,16 +87,9 @@ MSc host environment configuration
 Using the SBT project:
 https://github.com/gatling/gatling-sbt-plugin-demo
 
-Example:
-https://github.com/gustavotemple/gatling-sbt-plugin-demo
-
 ### How to run
 
 ```bash
 sbt clean compile
 sbt "gatling:testOnly gatling.<Simulation>Test"
 ```
-
-
-
-

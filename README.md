@@ -26,13 +26,13 @@ Granify replication package
 
 #### Orca
 
-- Repo: https://github.com/gustavotemple/orca)
+- Repo: https://github.com/gustavotemple/orca
 - Branch: `v8.31.5`
 - Swagger: http://127.0.0.1:8083/swagger-ui.html
 
 #### Clouddriver
 
-- Repo: https://github.com/gustavotemple/clouddriver)
+- Repo: https://github.com/gustavotemple/clouddriver
 - Branch: `v5.80.7`
 - Swagger: http://127.0.0.1:7002/swagger-ui.html
 
@@ -88,7 +88,12 @@ docker build -t <REPO> -f Dockerfile.ubuntu .
 ### Choerodon
 
 First of all, you need to build the `hzero-starter`, which is a dependency library.
-After that:
+
+Run `mvn clean install` in the folders below:
+- hzero-starter-core
+- hzero-starter-sqlparser
+
+After that, for the other microservices:
 
 ```bash
 mvn clean package spring-boot:repackage -Dmaven.test.skip=true
@@ -127,7 +132,7 @@ java -jar target/app.jar
 
 ### Spinnaker
 
-Just run the front50 Postman collection.
+Just run the front50 Postman collection (See [Postman Collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)).
 
 ### Choerodon
 
@@ -154,7 +159,6 @@ In case of case-sensitive errors, use: `lower_case_table_names=1`
 - [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard/tree/v2.0.3-branch/postman)
 - [workflow-service](https://github.com/gustavotemple/workflow-service/tree/v2.0.3-branch/postman)
 
-
 ## Profiling
 
 ### How to build
@@ -165,24 +169,34 @@ https://github.com/async-profiler/async-profiler
 ### How to run
 
 CPU:
+```bash
+async-profiler/build/bin/asprof -I <PACKAGE> -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>
+```
 
+Examples:
 ```bash
 # spinnaker:
-async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>
+async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f orca-cpu.html --title orca-cpu -e itimer 12345
 # choerodon
-async-profiler/build/bin/asprof -I 'io/choerodon/*' -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f asgard-cpu.html --title <TITLE>-cpu -e itimer 12345
 ```
 
 Memory:
-
 ```bash
-# spinnaker:
-async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d <SECONDS> -f <FILE-NAME>-mem.html --title <TITLE>-mem -e alloc <PID>
-# choerodon
-async-profiler/build/bin/asprof -I 'io/choerodon/*' -d <SECONDS> -f <FILE-NAME>-mem.html --title <TITLE>-mem -e alloc <PID>
+async-profiler/build/bin/asprof -I <PACKAGE> -d <SECONDS> -f <FILE-NAME>-mem.html --title <TITLE>-mem -e alloc <PID>
 ```
 
-## Gatling simulations
+Examples:
+```bash
+# spinnaker:
+async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f cloddriver-mem.html --title clouddriver-mem -e alloc 12345
+# choerodon
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f workflow-mem.html --title workflow-mem -e alloc 12345
+```
+
+## Gatling tests
+
+Gatling Simulation documentation: https://docs.gatling.io/reference/script/core/simulation
 
 ### Spinnaker
 
@@ -215,25 +229,42 @@ sbt "gatling:testOnly gatling.<SIMULATION>Test"
 
 ### Steps
 
-**Step 1:** Get the path of each controller in the microservice
+**Step 1:** Build Aegeus with `mvn clean compile assembly:single`
+
+https://github.com/MateusGabi/Aegeus
+
+**Step 2:** Configure the script `get_implementations_and_run_aegeus.sh`
+
+https://github.com/MateusGabi/Aegeus-scripts/blob/main/get_implementations_and_run_aegeus.sh
+
+**Step 3:** Get the path of each controller in the microservice
 
 ```bash
+# Run:
+bash get_implementations_and_run_aegeus.sh <PATH>
+# Example:
 bash get_implementations_and_run_aegeus.sh /home/user/choerodon-repos
 ```
 
 _Result:_ `SERVICES.out` file containing the paths of the controllers
 
-**Step 2:** Aggregate the individual analyses of the controllers using the `writemsdescriptor` flag
+**Step 4:** Aggregate the individual analyses of the controllers using the `writemsdescriptor` flag
 
 ```bash
+# Run:
+java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aegeus/repos/<PATH> -p java -writemsdescriptor
+# Example:
 java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aegeus/repos/home/user/choerodon-repos -p java -writemsdescriptor
 ```
 
 _Result:_ `.msd` file with the analysis of each controller, containing `params`, `output` and `types`
 
-**Step 3:** Analyze the metrics of the entire microservice using the `assessmetricsinmsa` flag
+**Step 5:** Analyze the metrics of the entire microservice using the `assessmetricsinmsa` flag
 
 ```bash
+# Run:
+java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aegeus/repos/<PATH> -p java -assessmetricsinmsa
+# Example:
 java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aegeus/repos/home/user/choerodon-repos -p java -assessmetricsinmsa
 ```
 

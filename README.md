@@ -7,18 +7,17 @@ This artifact utilizes Docker to facilitate reuse.
 ## Content
 
 1. [Analyzed Repositories](https://github.com/gustavotemple/Granify-replication-package#analyzed-repositories-experimental-unities)
-2. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
-3. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
-4. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
-5. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
-6. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
-7. [Gatling tests](https://github.com/gustavotemple/Granify-replication-package#gatling-tests)
-8. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
-9. [Result examples](https://github.com/gustavotemple/Granify-replication-package#result-examples)
+2. [Dependencies](https://github.com/gustavotemple/MSc-host-env-config#dependencies)
+3. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
+4. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
+5. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
+6. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
+7. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
+8. [Gatling tests](https://github.com/gustavotemple/Granify-replication-package#gatling-tests)
+9. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
+10. [Result examples](https://github.com/gustavotemple/Granify-replication-package#result-examples)
 
 ## Analyzed Repositories (Experimental Unities)
-
-`git clone` the repositories below:
 
 ### Spinnaker
 
@@ -75,6 +74,17 @@ This artifact utilizes Docker to facilitate reuse.
 - Repo: https://github.com/gustavotemple/workflow-service
 - Branch: `v2.0.3`
 - Swagger: http://localhost:8065/v2/api-docs
+
+
+## Dependencies
+
+- MySQL              & v5.7
+- Java               & v8 & v11
+- Async Profiler     & v2.10
+- Redis              & v6.0.16
+- Postman            & v10.19
+- Gatling            & v3.9.5
+- Docker             & v24.0.7
 
 ## How to build
 
@@ -181,7 +191,7 @@ Examples:
 # spinnaker:
 async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f orca-cpu.html --title orca-cpu -e itimer 12345
 # choerodon
-async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f asgard-cpu.html --title <TITLE>-cpu -e itimer 12345
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f asgard-cpu.html --title asgard-cpu -e itimer 12345
 ```
 
 Memory:

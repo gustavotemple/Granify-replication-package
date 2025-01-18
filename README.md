@@ -1,56 +1,76 @@
-# MSc-host-env-config
-MSc host environment configuration
+# Granify-replication-package
+Granify replication package
 
 ## Content
 
-1. [Repositories list](https://github.com/gustavotemple/MSc-host-env-config#repositories-list)
-2. [Used repositories branch](https://github.com/gustavotemple/MSc-host-env-config#used-repositories-branch)
-3. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
-4. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
-5. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
-6. [Swagger](https://github.com/gustavotemple/MSc-host-env-config#swagger)
-7. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
-9. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
-9. [Gatling simulations](https://github.com/gustavotemple/MSc-host-env-config#gatling-simulations)
-10. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
+1. [Analyzed Repositories](https://github.com/gustavotemple/MSc-host-env-config#repositories-list)
+2. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
+3. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
+4. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
+5. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
+6. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
+7. [Gatling simulations](https://github.com/gustavotemple/MSc-host-env-config#gatling-simulations)
+8. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
 
-## Repositories list
+## Analyzed Repositories (Experimental Unities)
 
 `git clone` the repositories below:
 
 ### Spinnaker
 
-- [front50](https://github.com/gustavotemple/front50)
-- [orca](https://github.com/gustavotemple/orca)
-- [clouddriver](https://github.com/gustavotemple/clouddriver)
+#### Front50
+
+- Repo: https://github.com/gustavotemple/front50
+- Branch: `v2.28.4`
+- Swagger: http://127.0.0.1:8080/swagger-ui.html
+
+#### Orca
+
+- Repo: https://github.com/gustavotemple/orca)
+- Branch: `v8.31.5`
+- Swagger: http://127.0.0.1:8083/swagger-ui.html
+
+#### Clouddriver
+
+- Repo: https://github.com/gustavotemple/clouddriver)
+- Branch: `v5.80.7`
+- Swagger: http://127.0.0.1:7002/swagger-ui.html
 
 ### Choerodon
 
-- [hzero-starter-parent](https://github.com/gustavotemple/hzero-starter-parent)
-- [choerodon-register](https://github.com/gustavotemple/choerodon-register)
-- [choerodon-platform](https://github.com/gustavotemple/choerodon-platform)
-- [choerodon-iam](https://github.com/gustavotemple/choerodon-iam)
-- [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard)
-- [workflow-service](https://github.com/gustavotemple/workflow-service)
+#### hzero-starter-parent
 
-## Used repositories branch
+- Repo: https://github.com/gustavotemple/hzero-starter-parent
+- Branch: `1.4`
 
-`git checkout` the branches below:
+#### Register
 
-### Spinnaker
+- Repo: https://github.com/gustavotemple/choerodon-register
+- Branch: `v2.0.0`
+- URL: http://localhost:8000
 
-- front50: `v2.28.4`
-- orca: `v8.31.5`
-- clouddriver: `v5.80.7`
+#### Platform
 
-### Choerodon
+- Repo: https://github.com/gustavotemple/choerodon-platform
+- Branch: `v2.0.3`
 
-- hzero-starter-parent: `1.4`
-- choerodon-register: `v2.0.0`
-- choerodon-platform: `v2.0.3`
-- choerodon-iam: `v2.0.8`
-- choerodon-asgard: `v2.0.3`
-- workflow-service: `v2.0.3`
+#### IAM
+
+- Repo: https://github.com/gustavotemple/choerodon-iam
+- Branch: `v2.0.8`
+- Swagger: http://localhost:8030/v2/api-docs
+
+#### Asgard
+
+- Repo: https://github.com/gustavotemple/choerodon-asgard
+- Branch: `v2.0.3`
+- Swagger: http://localhost:8040/v2/api-docs 
+
+#### Workflow
+
+- Repo: https://github.com/gustavotemple/workflow-service
+- Branch: `v2.0.3`
+- Swagger: http://localhost:8065/v2/api-docs
 
 ## How to build
 
@@ -119,20 +139,6 @@ Example:
 ```
 
 In case of case-sensitive errors, use: `lower_case_table_names=1`
-
-## Swagger
-
-### Spinnaker
-
-- Front50: http://127.0.0.1:8080/swagger-ui.html
-- Clouddriver: http://127.0.0.1:7002/swagger-ui.html
-- Orca: http://127.0.0.1:8083/swagger-ui.html
-
-### Choerodon
-
-- IAM: http://localhost:8030/v2/api-docs
-- Asgard: http://localhost:8040/v2/api-docs
-- Workflow: http://localhost:8065/v2/api-docs
 
 ## Postman collections
 

@@ -1,7 +1,7 @@
 # Granify replication package
 
 This artifact provides the instructions for Granify, a method for guiding microservices decomposition through performance and modularity analysis.
-This artifact contains a dataset with the paper's major results, and a `README` with instructions on how to build and run the Granify method to replicate these results.
+This artifact contains a dataset with the paper's major results, microservices used, and a `README` with the steps on how to build and run the Granify method to replicate the results.
 This artifact utilizes Docker to facilitate reuse.
 
 ## Content

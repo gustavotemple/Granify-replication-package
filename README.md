@@ -1,13 +1,13 @@
 # Granify replication package
 
-This artifact provides the source code for Granify, a method for guiding microservices decomposition through performance and modularity analysis.
+This artifact provides the instructions for Granify, a method for guiding microservices decomposition through performance and modularity analysis.
 This artifact contains a dataset with the paper's major results, and a `README` with instructions on how to build and run the Granify method to replicate these results.
 This artifact utilizes Docker to facilitate reuse.
 
 ## Content
 
 1. [Analyzed Repositories](https://github.com/gustavotemple/Granify-replication-package#analyzed-repositories-experimental-unities)
-2. [Dependencies](https://github.com/gustavotemple/Granify-replication-package#dependencies)
+2. [Requirements](https://github.com/gustavotemple/Granify-replication-package#requirements)
 3. [How to build](https://github.com/gustavotemple/Granify-replication-package#how-to-build)
 4. [How to run](https://github.com/gustavotemple/Granify-replication-package#how-to-run)
 5. [Database seeding/initialization](https://github.com/gustavotemple/Granify-replication-package#database-seedinginitialization)
@@ -75,8 +75,7 @@ This artifact utilizes Docker to facilitate reuse.
 - Branch: `v2.0.3`
 - Swagger: http://localhost:8065/v2/api-docs
 
-
-## Dependencies
+## Requirements
 
 - MySQL          `v5.7`
 - Java           `v8` & `v11`
@@ -145,7 +144,7 @@ java -jar target/app.jar
 
 ### Spinnaker
 
-Just run the front50 Postman collection (See [Postman Collections](https://github.com/gustavotemple/Granify-replication-package#postman-collections)).
+Just run the front50 Postman collection (See [Postman collections](https://github.com/gustavotemple/Granify-replication-package#postman-collections)).
 
 ### Choerodon
 
@@ -174,6 +173,8 @@ In case of case-sensitive errors, use: `lower_case_table_names=1`
 
 ## Profiling
 
+
+
 ### How to build
 
 Setup:
@@ -190,7 +191,7 @@ Examples:
 ```bash
 # spinnaker:
 async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f orca-cpu.html --title orca-cpu -e itimer 12345
-# choerodon
+# choerodon:
 async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f asgard-cpu.html --title asgard-cpu -e itimer 12345
 ```
 
@@ -203,7 +204,7 @@ Examples:
 ```bash
 # spinnaker:
 async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f cloddriver-mem.html --title clouddriver-mem -e alloc 12345
-# choerodon
+# choerodon:
 async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f workflow-mem.html --title workflow-mem -e alloc 12345
 ```
 

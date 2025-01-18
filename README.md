@@ -7,14 +7,14 @@ This artifact utilizes Docker to facilitate reuse.
 ## Content
 
 1. [Analyzed Repositories](https://github.com/gustavotemple/Granify-replication-package#analyzed-repositories-experimental-unities)
-2. [Dependencies](https://github.com/gustavotemple/MSc-host-env-config#dependencies)
-3. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
-4. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
-5. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
-6. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
-7. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
+2. [Dependencies](https://github.com/gustavotemple/Granify-replication-package#dependencies)
+3. [How to build](https://github.com/gustavotemple/Granify-replication-package#how-to-build)
+4. [How to run](https://github.com/gustavotemple/Granify-replication-package#how-to-run)
+5. [Database seeding/initialization](https://github.com/gustavotemple/Granify-replication-package#database-seedinginitialization)
+6. [Postman collections](https://github.com/gustavotemple/Granify-replication-package#postman-collections)
+7. [Profiling](https://github.com/gustavotemple/Granify-replication-package#profiling)
 8. [Gatling tests](https://github.com/gustavotemple/Granify-replication-package#gatling-tests)
-9. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
+9. [Aegeus](https://github.com/gustavotemple/Granify-replication-package#aegeus)
 10. [Result examples](https://github.com/gustavotemple/Granify-replication-package#result-examples)
 
 ## Analyzed Repositories (Experimental Unities)
@@ -119,7 +119,7 @@ docker build -t choerodon-<REPO> -f Dockerfile .
 
 `docker-compose.yml` folder:
 
-https://github.com/gustavotemple/MSc-host-env-config/tree/main/docker-composes
+https://github.com/gustavotemple/Granify-replication-package/tree/main/docker-composes
 
 **Run:**
 
@@ -145,7 +145,7 @@ java -jar target/app.jar
 
 ### Spinnaker
 
-Just run the front50 Postman collection (See [Postman Collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)).
+Just run the front50 Postman collection (See [Postman Collections](https://github.com/gustavotemple/Granify-replication-package#postman-collections)).
 
 ### Choerodon
 

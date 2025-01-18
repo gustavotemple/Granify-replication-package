@@ -78,13 +78,13 @@ This artifact utilizes Docker to facilitate reuse.
 
 ## Dependencies
 
-- MySQL              & v5.7
-- Java               & v8 & v11
-- Async Profiler     & v2.10
-- Redis              & v6.0.16
-- Postman            & v10.19
-- Gatling            & v3.9.5
-- Docker             & v24.0.7
+- MySQL          `v5.7`
+- Java           `v8` & `v11`
+- Async Profiler `v2.10`
+- Redis          `v6.0.16`
+- Postman        `v10.19`
+- Gatling        `v3.9.5`
+- Docker         `v24.0.7`
 
 ## How to build
 

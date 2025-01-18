@@ -1,16 +1,20 @@
-# Granify-replication-package
-Granify replication package
+# Granify replication package
+
+This artifact provides the source code for Granify, a method for guiding microservices decomposition through performance and modularity analysis.
+This artifact contains a dataset with the paper's major results, and a `README` with instructions on how to build and run the Granify method to replicate these results.
+This artifact utilizes Docker to facilitate reuse.
 
 ## Content
 
-1. [Analyzed Repositories](https://github.com/gustavotemple/MSc-host-env-config#repositories-list)
+1. [Analyzed Repositories](https://github.com/gustavotemple/Granify-replication-package#analyzed-repositories-experimental-unities)
 2. [How to build](https://github.com/gustavotemple/MSc-host-env-config#how-to-build)
 3. [How to run](https://github.com/gustavotemple/MSc-host-env-config#how-to-run)
 4. [Database seeding/initialization](https://github.com/gustavotemple/MSc-host-env-config#database-seedinginitialization)
 5. [Postman collections](https://github.com/gustavotemple/MSc-host-env-config#postman-collections)
 6. [Profiling](https://github.com/gustavotemple/MSc-host-env-config#profiling)
-7. [Gatling simulations](https://github.com/gustavotemple/MSc-host-env-config#gatling-simulations)
+7. [Gatling tests](https://github.com/gustavotemple/Granify-replication-package#gatling-tests)
 8. [Aegeus](https://github.com/gustavotemple/MSc-host-env-config#aegeus)
+9. [Result examples](https://github.com/gustavotemple/Granify-replication-package#result-examples)
 
 ## Analyzed Repositories (Experimental Unities)
 
@@ -94,7 +98,6 @@ Run `mvn clean install` in the folders below:
 - hzero-starter-sqlparser
 
 After that, for the other microservices:
-
 ```bash
 mvn clean package spring-boot:repackage -Dmaven.test.skip=true
 docker build -t choerodon-<REPO> -f Dockerfile .
@@ -270,3 +273,15 @@ java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aeg
 
 _Result:_ `.mr` file with the microservice analysis, containing `ServiceInterfaceDataCohesion`, `StrictServiceImplementationCohesion`, `LackOfMessageLevelCohesion` and `NumberOfOperations`
 
+## Result examples
+
+### Spinnaker
+
+- [orca](https://github.com/gustavotemple/orca/tree/v8.31.5-branch/results)
+- [clouddriver](https://github.com/gustavotemple/clouddriver/tree/v5.80.7-branch/results)
+
+### Choerodon
+
+- [choerodon-iam](https://github.com/gustavotemple/choerodon-iam/tree/v2.0.8-branch/results)
+- [choerodon-asgard](https://github.com/gustavotemple/choerodon-asgard/tree/v2.0.3-branch/results)
+- [workflow-service](https://github.com/gustavotemple/workflow-service/tree/v2.0.3-branch/results)

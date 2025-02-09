@@ -25,19 +25,19 @@ This artifact utilizes Docker to facilitate reuse.
 
 - Repo: https://github.com/gustavotemple/front50
 - Branch: `v2.28.4`
-- Swagger: http://127.0.0.1:8080/swagger-ui.html
+- Swagger: http://<LOCALHOST>:8080/swagger-ui.html
 
 #### Orca
 
 - Repo: https://github.com/gustavotemple/orca
 - Branch: `v8.31.5`
-- Swagger: http://127.0.0.1:8083/swagger-ui.html
+- Swagger: http://<LOCALHOST>:8083/swagger-ui.html
 
 #### Clouddriver
 
 - Repo: https://github.com/gustavotemple/clouddriver
 - Branch: `v5.80.7`
-- Swagger: http://127.0.0.1:7002/swagger-ui.html
+- Swagger: http://<LOCALHOST>:7002/swagger-ui.html
 
 ### Choerodon
 
@@ -50,7 +50,7 @@ This artifact utilizes Docker to facilitate reuse.
 
 - Repo: https://github.com/gustavotemple/choerodon-register
 - Branch: `v2.0.0`
-- URL: http://localhost:8000
+- URL: http://<LOCALHOST>:8000
 
 #### Platform
 
@@ -61,19 +61,19 @@ This artifact utilizes Docker to facilitate reuse.
 
 - Repo: https://github.com/gustavotemple/choerodon-iam
 - Branch: `v2.0.8`
-- Swagger: http://localhost:8030/v2/api-docs
+- Swagger: http://<LOCALHOST>:8030/v2/api-docs
 
 #### Asgard
 
 - Repo: https://github.com/gustavotemple/choerodon-asgard
 - Branch: `v2.0.3`
-- Swagger: http://localhost:8040/v2/api-docs 
+- Swagger: http://<LOCALHOST>:8040/v2/api-docs 
 
 #### Workflow
 
 - Repo: https://github.com/gustavotemple/workflow-service
 - Branch: `v2.0.3`
-- Swagger: http://localhost:8065/v2/api-docs
+- Swagger: http://<LOCALHOST>:8065/v2/api-docs
 
 ## Requirements
 

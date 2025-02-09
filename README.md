@@ -251,7 +251,7 @@ https://github.com/MateusGabi/Aegeus
 
 https://github.com/MateusGabi/Aegeus-scripts/blob/main/get_implementations_and_run_aegeus.sh
 
-**Step 3:** Get the path of each controller in the microservice
+**Step 3:** Get the path of each web controller in the microservice
 
 ```bash
 # Run:
@@ -260,9 +260,9 @@ bash get_implementations_and_run_aegeus.sh <PATH>
 bash get_implementations_and_run_aegeus.sh /home/user/choerodon-repos
 ```
 
-_Result:_ `SERVICES.out` file containing the paths of the controllers
+_Result:_ `SERVICES.out` file containing the paths of the web controllers
 
-**Step 4:** Aggregate the individual analyses of the controllers using the `writemsdescriptor` flag
+**Step 4:** Aggregate the individual analyses of the web controllers using the `writemsdescriptor` flag
 
 ```bash
 # Run:
@@ -271,7 +271,7 @@ java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aeg
 java -jar Aegeus/target/Aegeus-1.0-SNAPSHOT-jar-with-dependencies.jar -ms ~/.aegeus/repos/home/user/choerodon-repos -p java -writemsdescriptor
 ```
 
-_Result:_ `.msd` file with the analysis of each controller, containing `params`, `output` and `types`
+_Result:_ `.msd` file with the analysis of each web controller, containing `params`, `output` and `types`
 
 **Step 5:** Analyze the metrics of the entire microservice using the `assessmetricsinmsa` flag
 

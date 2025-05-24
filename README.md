@@ -77,13 +77,21 @@ This artifact utilizes Docker to facilitate reuse.
 
 ## Requirements
 
-- MySQL          `v5.7`
-- Java           `v8` & `v11`
-- Async Profiler `v2.10`
-- Redis          `v6.0.16`
+### Host Environment
+
+- Async Profiler `v4.0`
+- GCC            `v7.5.0+` or Clang `v7.0.0+`
+- JDK            `v11`
 - Postman        `v10.19`
 - Gatling        `v3.9.5`
 - Docker         `v24.0.7`
+
+### Container Environment
+
+- Base Image `ubuntu:22.04` (Glibc `v2.35`)
+- Java       `v8` & `v11` (with `dbg` package for debug symbols)
+- Redis      `v6.0.16`
+- MySQL      `v5.7`
 
 ## How to build
 
@@ -173,8 +181,6 @@ In case of case-sensitive errors, use: `lower_case_table_names=1`
 
 ## Profiling
 
-
-
 ### How to build
 
 Setup:
@@ -184,28 +190,28 @@ https://github.com/async-profiler/async-profiler
 
 CPU:
 ```bash
-async-profiler/build/bin/asprof -I <PACKAGE> -d <SECONDS> -f <FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>
+async-profiler/build/bin/asprof -I <PACKAGE> -d <SECONDS> -f /tmp/<FILE-NAME>-cpu.html --title <TITLE>-cpu -e itimer <PID>
 ```
 
 Examples:
 ```bash
 # spinnaker:
-async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f orca-cpu.html --title orca-cpu -e itimer 12345
+async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f /tmp/orca-cpu.html --title orca-cpu -e itimer 12345
 # choerodon:
-async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f asgard-cpu.html --title asgard-cpu -e itimer 12345
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f /tmp/asgard-cpu.html --title asgard-cpu -e itimer 12345
 ```
 
 Memory:
 ```bash
-async-profiler/build/bin/asprof -I <PACKAGE> -d <SECONDS> -f <FILE-NAME>-mem.html --title <TITLE>-mem -e alloc <PID>
+async-profiler/build/bin/asprof -I <PACKAGE> -d <SECONDS> -f /tmp/<FILE-NAME>-mem.html --title <TITLE>-mem -e alloc <PID>
 ```
 
 Examples:
 ```bash
 # spinnaker:
-async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f cloddriver-mem.html --title clouddriver-mem -e alloc 12345
+async-profiler/build/bin/asprof -I 'com/netflix/spinnaker/*' -d 600 -f /tmp/cloddriver-mem.html --title clouddriver-mem -e alloc 12345
 # choerodon:
-async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f workflow-mem.html --title workflow-mem -e alloc 12345
+async-profiler/build/bin/asprof -I 'io/choerodon/*' -d 600 -f /tmp/workflow-mem.html --title workflow-mem -e alloc 12345
 ```
 
 ## Gatling tests

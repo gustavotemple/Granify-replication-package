@@ -114,8 +114,8 @@ services:
     volumes:
       - /tmp:/tmp
       - /root/async-profiler:/root/async-profiler
-    security_opt:
-      - seccomp:unconfined
+    cap_add:
+      - SYS_ADMIN
     deploy:
       resources:
         limits:

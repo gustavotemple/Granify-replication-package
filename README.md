@@ -80,7 +80,6 @@ This artifact utilizes Docker to facilitate reuse.
 ### Host Environment
 
 - Async Profiler `v4.0`
-- GCC            `v7.5.0+` or Clang `v7.0.0+`
 - JDK            `v11`
 - Postman        `v10.19`
 - Gatling        `v3.9.5`
@@ -88,8 +87,8 @@ This artifact utilizes Docker to facilitate reuse.
 
 ### Container Environment
 
-- Base Image `ubuntu:22.04` (Glibc `v2.35`)
-- Java       `v8` & `v11` (with `dbg` package for debug symbols)
+- Base Image `ubuntu:22.04` (glibc `v2.35`)
+- JDK        `openjdk-8-jdk` (Choerodon) or `openjdk-11-jdk` (Spinnaker), with the respective `dbg` package for debug symbols
 - Redis      `v6.0.16`
 - MySQL      `v5.7`
 

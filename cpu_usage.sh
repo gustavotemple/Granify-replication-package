@@ -1,48 +1,84 @@
 #!/bin/bash
 
-if [ $# -ne 2 ]; then
-  echo "Usage: $0 <duration in seconds> <container ID>"
+# List all running containers
+containers=($(docker ps --format "{{.ID}} {{.Names}}"))
+
+# Check if there are running containers
+if [ ${#containers[@]} -eq 0 ]; then
+  echo "No running containers found."
   exit 1
 fi
 
-duration="$1"
-container_id="$2"
+echo "Select a container to monitor:"
+for ((i = 0; i < ${#containers[@]}; i+=2)); do
+  index=$((i / 2))
+  echo "[$index] ${containers[i+1]} (${containers[i]})"
+done
+
+# Prompt user to select a container
+read -p "Enter the number of the container: " selection
+
+container_index=$((selection * 2))
+container_id="${containers[container_index]}"
+container_name="${containers[container_index+1]}"
+
+if [ -z "$container_id" ]; then
+  echo "Invalid selection."
+  exit 1
+fi
+
+# Prompt user for duration
+read -p "Enter monitoring duration (in seconds): " duration
 
 if ! [[ "$duration" =~ ^[0-9]+$ ]]; then
   echo "Error: Duration must be a positive integer."
   exit 1
 fi
 
-echo "Measuring average CPU usage for container ID: $container_id"
+echo "Monitoring container: $container_name ($container_id)"
 echo "Duration: $duration seconds"
 
-# Function to get average CPU usage for a given container ID
-get_avg_cpu_usage() {
-  docker stats --no-stream "$container_id" --format "{{.CPUPerc}}" | awk '{ sum += $1; n++ } END { if (n > 0) print sum / n; }'
+# Initialize totals
+total_cpu=0
+total_mem=0
+samples=0
+
+# Function to get current CPU percentage
+get_cpu_usage() {
+  docker stats --no-stream "$container_id" --format "{{.CPUPerc}}" | tr -d '%'
 }
 
-# Initial CPU usage value to calculate the delta later
-prev_cpu_usage=$(get_avg_cpu_usage)
+# Function to get current memory usage in MiB
+get_mem_usage() {
+  docker stats --no-stream "$container_id" --format "{{.MemUsage}}" | awk -F'/' '{print $1}' | sed 's/[^0-9.]//g'
+}
 
-# Calculate the end time of the measurement
+# Collect data over time
 end_time=$((SECONDS + duration))
-
-# Loop until the end time is reached
 while [ $SECONDS -lt $end_time ]; do
   sleep 1
-  curr_cpu_usage=$(get_avg_cpu_usage)
-  
-  # Calculate the difference in CPU usage between the two samples
-  cpu_usage_diff=$(echo "$curr_cpu_usage - $prev_cpu_usage" | bc)
-  
-  prev_cpu_usage=$curr_cpu_usage
+  cpu=$(get_cpu_usage)
+  mem=$(get_mem_usage)
+
+  total_cpu=$(echo "$total_cpu + $cpu" | bc)
+  total_mem=$(echo "$total_mem + $mem" | bc)
+  samples=$((samples + 1))
 done
 
-# Check if the final value is not zero before displaying
-if (( $(echo "$cpu_usage_diff != 0" | bc -l) )); then
-  # Output the final average CPU usage
-  echo "Average CPU Usage after $duration seconds: $curr_cpu_usage%"
-else
-  echo "Warning: Average CPU usage was zero for the entire duration."
+# Compute averages
+avg_cpu=$(echo "scale=2; $total_cpu / $samples" | bc)
+avg_mem=$(echo "scale=2; $total_mem / $samples" | bc)
+
+# Output results
+echo "---------------------------------------------"
+echo "Average CPU Usage after $duration seconds: $avg_cpu%"
+echo "Average Memory Usage after $duration seconds: $avg_mem MiB"
+
+# Warnings
+if (( $(echo "$avg_cpu == 0" | bc -l) )); then
+  echo "Warning: Average CPU usage was zero."
 fi
 
+if (( $(echo "$avg_mem == 0" | bc -l) )); then
+  echo "Warning: Average Memory usage was zero."
+fi
